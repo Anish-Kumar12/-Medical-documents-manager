@@ -17,6 +17,6 @@ router.get('/', listDocuments);
 router.get('/:id', downloadDocument);
 
 // Delete a document
-router.delete(':id', deleteDocument);
+router.delete('/:id', deleteDocument);
 
 export default router;
