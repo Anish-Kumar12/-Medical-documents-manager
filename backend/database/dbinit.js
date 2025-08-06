@@ -12,14 +12,15 @@ const db = new sqlite3.Database(dbPath, (err) => {
 });
 
 const createTableQuery = `
-  CREATE TABLE IF NOT EXISTS documents (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    filename TEXT NOT NULL,
-    filepath TEXT NOT NULL,
-    filesize INTEGER NOT NULL,
-    created_at TEXT NOT NULL
-  );
+CREATE TABLE IF NOT EXISTS documents (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  filename TEXT NOT NULL,
+  filepath TEXT NOT NULL,
+  filesize INTEGER NOT NULL,
+  created_at TEXT NOT NULL
+);
 `;
+
 db.run(createTableQuery);
 
 export default db;

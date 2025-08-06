@@ -1,21 +1,22 @@
-import React from 'react';
+import React from "react";
 
-const DeleteConfirmation = ({ isOpen, onClose, onConfirm, filename , id }) => {
+const DeleteConfirmation = ({ isOpen, onClose, onConfirm, filename }) => {
   if (!isOpen) return null;
 
-  
-
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
       onClick={onClose}
     >
-      <div 
+      <div
         className="bg-white rounded-lg p-6 max-w-sm w-full shadow-lg"
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-xl font-semibold mb-4">Confirm Delete</h2>
-        <p className="mb-6">Are you sure you want to delete <span className="font-bold">{filename}</span>?</p>
+        <p className="mb-6">
+          Are you sure you want to delete{" "}
+          <span className="font-bold">{filename}</span>?
+        </p>
         <div className="flex justify-end space-x-4">
           <button
             onClick={onClose}

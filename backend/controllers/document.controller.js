@@ -2,9 +2,10 @@ import path from 'path';
 import fs from 'fs';
 import { runQuery, getQuery, allQuery } from '../utils/db.utils.js';
 
-
 export async function uploadDocument(req, res) {
-  if (!req.file) return res.status(400).json({ error: 'File is required and must be PDF.' });
+  if (!req.file) {
+    return res.status(400).json({ error: 'File is required and must be PDF.' });
+  }
   const { originalname, path: filepath, size } = req.file;
   try {
     const result = await runQuery(
@@ -15,7 +16,7 @@ export async function uploadDocument(req, res) {
   } catch (err) {
     res.status(500).json({ error: 'Database error.' });
   }
-};
+}
 
 export async function listDocuments(req, res) {
   try {
@@ -24,29 +25,30 @@ export async function listDocuments(req, res) {
   } catch (err) {
     res.status(500).json({ error: 'Database error.' });
   }
-};
+}
 
 export async function downloadDocument(req, res) {
   try {
     const doc = await getQuery('SELECT * FROM documents WHERE id = ?', [req.params.id]);
-    if (!doc) return res.status(404).json({ error: 'File not found.' });
+    if (!doc) {
+      return res.status(404).json({ error: 'File not found.' });
+    }
     res.download(path.resolve(doc.filepath), doc.filename);
   } catch (err) {
     res.status(500).json({ error: 'Database error.' });
   }
-};
+}
 
 export async function deleteDocument(req, res) {
   try {
     const doc = await getQuery('SELECT * FROM documents WHERE id = ?', [req.params.id]);
     if (!doc) {
-      res.status(404).json({ error: 'File not found.' });
-      return;
+      return res.status(404).json({ error: 'File not found.' });
     }
+    // Delete file from filesystem
     fs.unlink(doc.filepath, async (err) => {
       if (err) {
-        res.status(500).json({ error: 'Could not delete file.' });
-        return;
+        return res.status(500).json({ error: 'Could not delete file.' });
       }
       try {
         await runQuery('DELETE FROM documents WHERE id = ?', [req.params.id]);
@@ -58,4 +60,4 @@ export async function deleteDocument(req, res) {
   } catch (e) {
     res.status(500).json({ error: 'Something went wrong.' });
   }
-};
+}
