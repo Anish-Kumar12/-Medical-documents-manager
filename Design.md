@@ -24,6 +24,14 @@ To support 1,000 users, I would make a few changes:
 - I would make the backend scalable by running multiple server instances and using a load balancer.
 - On the frontend, I would add pagination so loading a long list of documents is faster.
 
+---
+
+# 🧱 Architecture Overview
+
+![Architecture Diagram](./screenshots/architecture.png)
+
+---
+
 #  API Specification
 
 ## 1. Upload Document
