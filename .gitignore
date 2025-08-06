@@ -31,3 +31,11 @@ logs/
 *.swo
 *.bak
 *.tmp
+*.sqlite
+
+# Uploaded files
+uploads/
+
+# Database
+backend/database.sqlite
+
